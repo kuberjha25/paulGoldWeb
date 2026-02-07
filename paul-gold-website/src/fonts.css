@@ -1,0 +1,114 @@
+/* ============ GOTHAM (STRAIGHT) FONT FAMILY ============ */
+@font-face {
+  font-family: 'Gotham';
+  src: url('./assets/fonts/Gotham-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('./assets/fonts/Gotham-ExtraLight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('./assets/fonts/Gotham-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('./assets/fonts/Gotham-Book.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('./assets/fonts/Gotham-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* NOTE: Gotham-Bold.otf missing from your list */
+/* If you have it, add:
+@font-face {
+  font-family: 'Gotham';
+  src: url('Gotham-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('./assets/fonts/Gotham-Ultra.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============ GOTHAM ROUNDED FONT FAMILY ============ */
+@font-face {
+  font-family: 'Gotham Rounded';
+  src: url('./assets/fonts/gotham-rounded-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham Rounded';
+  src: url('./assets/fonts/gotham-rounded-book.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham Rounded';
+  src: url('./assets/fonts/gotham-rounded-medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham Rounded';
+  src: url('./assets/fonts/gotham-rounded-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Black';
+  src: url('./assets/fonts/PlayfairDisplay-Black.ttf') format('true-type');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Playfair Bold';
+  src: url('./assets/fonts/PlayfairDisplay-Bold.ttf') format('true-type');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Playfair Regular';
+  src: url('./assets/fonts/PlayfairDisplay-Regular.ttf') format('true-type');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
