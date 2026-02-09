@@ -1,28 +1,112 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../styling/BuySection.css";
-import { FaGift, FaExchangeAlt, FaPiggyBank, FaArrowUp } from "react-icons/fa";
+import { FaExchangeAlt } from "react-icons/fa";
 
-const BuySection = () => {
+const BuySection = ({ onOpenPopup, onSuccess, metalRates, loading }) => {
   const [metal, setMetal] = useState("gold");
-  const [weight, setWeight] = useState(10);
-  const [showPopup, setShowPopup] = useState(false);
-  const [contactMode, setContactMode] = useState("phone"); // phone | email
-  const [inputValue, setInputValue] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
-  const APP_LINKS = {
-    ios: "#", // later replace with App Store link
-    android: "#", // later replace with Play Store link
-  };
-  //   const APP_LINKS = {
-  //   ios: import.meta.env.VITE_APPSTORE_URL,
-  //   android: import.meta.env.VITE_PLAYSTORE_URL,
-  // };
+  const [weight, setWeight] = useState("");
+  const [amount, setAmount] = useState("");
+  const [activeFeature, setActiveFeature] = useState(null);
+  const [activeInput, setActiveInput] = useState("weight");
+  const [isAmountFocused, setIsAmountFocused] = useState(false);
 
-  const pricePerGramGold = 1599.5;
-  const pricePerGramSilver = 200.25;
-  const amount = (
-    weight * (metal === "gold" ? pricePerGramGold : pricePerGramSilver)
-  ).toFixed(4);
+  const weightInputRef = useRef(null);
+  const amountInputRef = useRef(null);
+
+  const APP_LINKS = {
+    ios: import.meta.env.VITE_APPSTORE_URL,
+    android: import.meta.env.VITE_PLAYSTORE_URL,
+  };
+
+  const pricePerGramGold = metalRates?.gold?.buy_rate || 0.00;
+  const pricePerGramSilver = metalRates?.silver?.buy_rate || 0.00;
+
+  // Update amount when rates change
+  // useEffect(() => {
+  //   const pricePerGram = metal === "gold" ? pricePerGramGold : pricePerGramSilver;
+  //   setAmount(weight * pricePerGram);
+  // }, [metalRates, metal, weight, pricePerGramGold, pricePerGramSilver]);
+
+  const features = [
+    {
+      id: 1,
+      title: "Gift",
+      description: "Send digital gold as a gift to your loved ones",
+      icon: "gift.webp",
+    },
+    {
+      id: 2,
+      title: "Convert",
+      description: "Convert between different denominations",
+      icon: "convert.webp",
+    },
+    {
+      id: 3,
+      title: "SIP",
+      description: "Start a Systematic Investment Plan in gold",
+      icon: "sip.png",
+    },
+    {
+      id: 4,
+      title: "Sell",
+      description: "Sell your gold anytime at live market rates",
+      icon: "sell.webp",
+    },
+  ];
+
+  const getPricePerGram = () =>
+    metal === "gold" ? pricePerGramGold : pricePerGramSilver;
+
+  const formatAmount = (value) => {
+    if (!value) return "";
+    return `₹${Number(value)
+      .toFixed(2)
+      .replace(/\d(?=(\d{3})+\.)/g, "$&,")}`;
+  };
+
+  const handleWeightChange = (e) => {
+    const val = e.target.value;
+
+    if (val === "") {
+      setWeight("");
+      setAmount("");
+      return;
+    }
+
+    const numericValue = parseFloat(val);
+    if (isNaN(numericValue)) return;
+
+    const price = getPricePerGram();
+    setWeight(val);
+    setAmount((numericValue * price).toFixed(2));
+  };
+
+  const handleAmountChange = (e) => {
+    const val = e.target.value;
+
+    // Allow only numbers and ONE dot
+    if (!/^\d*\.?\d*$/.test(val)) return;
+
+    setAmount(val);
+
+    if (val === "" || val === ".") {
+      setWeight("");
+      return;
+    }
+
+    const price = getPricePerGram();
+    setWeight((parseFloat(val) / price).toFixed(4));
+  };
+
+  const handleSwap = () => {
+    if (activeInput === "weight") {
+      amountInputRef.current?.focus();
+      setActiveInput("amount");
+    } else {
+      weightInputRef.current?.focus();
+      setActiveInput("weight");
+    }
+  };
 
   return (
     <section id="buy-section" className="buy-section">
@@ -42,48 +126,53 @@ const BuySection = () => {
           </p>
 
           <div className="feature-row">
-            <div className="feature-box">
-              <FaGift />
-              <span>Gift</span>
-            </div>
-            <div className="feature-box">
-              <FaExchangeAlt />
-              <span>Convert</span>
-            </div>
-            <div className="feature-box">
-              <FaPiggyBank />
-              <span>SIP</span>
-            </div>
-            <div className="feature-box">
-              <FaArrowUp />
-              <span>Sell</span>
-            </div>
-          </div>
+            {features.map((feature) => (
+              <div
+                key={feature.id}
+                className="feature-box"
+                onClick={() =>
+                  window.innerWidth <= 768 &&
+                  setActiveFeature(
+                    activeFeature === feature.id ? null : feature.id,
+                  )
+                }
+                onMouseEnter={() =>
+                  window.innerWidth > 768 && setActiveFeature(feature.id)
+                }
+                onMouseLeave={() =>
+                  window.innerWidth > 768 && setActiveFeature(null)
+                }
+              >
+                <div className="feature-icon-container">
+                  <img
+                    src={feature.icon}
+                    alt={feature.title}
+                    className="feature-icon"
+                  />
+                </div>
+                <span className="feature-title">{feature.title}</span>
 
-          <div className="activity">
-            <span className="dot" />3 people bought 2.8463gm gold in the last
-            hour
+                {activeFeature === feature.id && (
+                  <div className="feature-hover-tooltip">
+                    <div className="tooltip-title">{feature.title}</div>
+                    <div className="tooltip-description">
+                      {feature.description}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
 
           <div className="store-buttons">
-            <a
-              href={APP_LINKS.ios}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Download on App Store"
-            >
+            <a href={APP_LINKS.ios} target="_blank" rel="noreferrer">
               <img
                 src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
                 alt="Download on the App Store"
               />
             </a>
 
-            <a
-              href={APP_LINKS.android}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Get it on Google Play"
-            >
+            <a href={APP_LINKS.android} target="_blank" rel="noreferrer">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                 alt="Get it on Google Play"
@@ -93,17 +182,32 @@ const BuySection = () => {
         </div>
 
         {/* RIGHT */}
-        <div className="buy-card">
+        <div
+          className={`buy-card ${
+            metal === "silver" ? "silver-theme" : "gold-theme"
+          }`}
+        >
           <div className="tabs">
             <button
               className={metal === "gold" ? "active" : ""}
-              onClick={() => setMetal("gold")}
+              onClick={() => {
+                setMetal("gold");
+                if (weight) {
+                  setAmount((weight * pricePerGramGold).toFixed(2));
+                }
+              }}
             >
               GOLD
             </button>
+
             <button
               className={metal === "silver" ? "active" : ""}
-              onClick={() => setMetal("silver")}
+              onClick={() => {
+                setMetal("silver");
+                if (weight) {
+                  setAmount((weight * pricePerGramSilver).toFixed(2));
+                }
+              }}
             >
               SILVER
             </button>
@@ -111,12 +215,11 @@ const BuySection = () => {
 
           <div className="price-row">
             <div className="price-left">
-              {/* <div className="bar-icon">🪙</div> */}
-              {metal === "gold" ? (
-                <img src="goldbar.png" className="gold-bar-image" />
-              ) : (
-                <img src="silverbar.png" className="gold-bar-image" />
-              )}
+              <img
+                src={metal === "gold" ? "goldbar.webp" : "silverbar.png"}
+                alt={metal}
+                className="gold-bar-image"
+              />
               <div>
                 <h3>Buying Price</h3>
                 <span className="purity">
@@ -126,9 +229,7 @@ const BuySection = () => {
             </div>
 
             <div className="price-right">
-              <span className="price">
-                ₹{metal === "gold" ? pricePerGramGold : pricePerGramSilver}/g
-              </span>
+              <span className="price">₹{getPricePerGram().toFixed(2)}/g</span>
               <span className="live">
                 <span className="live-dot" /> Live Price
               </span>
@@ -136,164 +237,46 @@ const BuySection = () => {
           </div>
 
           <div className="calc-box">
-            <div>
+            <div className="calc-input-group">
               <label>Weight (gms)</label>
               <input
-                type="number"
+                ref={weightInputRef}
+                type="text"
                 value={weight}
-                onChange={(e) => setWeight(e.target.value)}
+                onFocus={() => setActiveInput("weight")}
+                onChange={handleWeightChange}
+                placeholder="Enter weight"
               />
             </div>
 
-            <div className="equals">⇄</div>
+            <button className="swap-button" onClick={handleSwap}>
+              <FaExchangeAlt />
+            </button>
 
-            <div>
-              <label>Amount</label>
-              <input value={`₹${amount}`} readOnly />
+            <div className="calc-input-group">
+              <label>Amount (₹)</label>
+              <input
+                ref={amountInputRef}
+                type="text"
+                value={isAmountFocused ? amount : formatAmount(amount)}
+                onFocus={() => {
+                  setIsAmountFocused(true);
+                  setActiveInput("amount");
+                }}
+                onBlur={() => setIsAmountFocused(false)}
+                onChange={handleAmountChange}
+                placeholder="Enter amount"
+              />
             </div>
           </div>
 
-          <button className="buy-btn" onClick={() => setShowPopup(true)}>
+          <button className="buy-btn" onClick={onOpenPopup}>
             BUY {metal.toUpperCase()}
           </button>
 
           <p className="note">Buy 24K 999 purity guaranteed by PML</p>
         </div>
       </div>
-
-      {/* TOP ALERT */}
-      {showAlert && (
-        <div className="top-alert">
-          <span className="tick">✔</span>
-          App link sent successfully
-        </div>
-      )}
-      {showPopup && (
-        <>
-          <div className="z-popup-overlay">
-            <div className="z-popup">
-              {/* CLOSE */}
-              <button className="z-close" onClick={() => setShowPopup(false)}>
-                ✕
-              </button>
-
-              {/* LEFT IMAGE */}
-              <div className="z-left">
-                <img src="Dashboard.svg" alt="Paul Gold App" />
-              </div>
-
-              {/* RIGHT CONTENT */}
-              <div className="z-right">
-                <h2>Get the Paul Gold App</h2>
-                <p>
-                  We will send you a link, open it on your phone to download the
-                  app
-                </p>
-
-                {/* TOGGLE */}
-                <div className="z-toggle">
-                  <label
-                    className={`z-radio ${contactMode === "phone" ? "active" : ""}`}
-                    onClick={() => {
-                      setContactMode("phone");
-                      setInputValue("");
-                    }}
-                  >
-                    <span className="radio-circle" />
-                    <span className="radio-text">Phone</span>
-                  </label>
-
-                  <label
-                    className={`z-radio ${contactMode === "email" ? "active" : ""}`}
-                    onClick={() => {
-                      setContactMode("email");
-                      setInputValue("");
-                    }}
-                  >
-                    <span className="radio-circle" />
-                    <span className="radio-text">Email</span>
-                  </label>
-                </div>
-
-                {/* INPUT */}
-                {/* INPUT */}
-                <div className="z-input-row">
-                  {contactMode === "phone" && (
-                    <span className="country">+91</span>
-                  )}
-                  <input
-                    type={contactMode === "phone" ? "tel" : "email"}
-                    placeholder={
-                      contactMode === "phone"
-                        ? "Enter mobile number"
-                        : "Enter email address"
-                    }
-                    value={inputValue}
-                    maxLength={contactMode === "phone" ? 10 : undefined}
-                    onChange={(e) => {
-                      let val = e.target.value;
-
-                      if (contactMode === "phone") {
-                        val = val.replace(/\D/g, "");
-                      }
-
-                      setInputValue(val);
-                    }}
-                    className="z-input"
-                  />
-
-                  {/* SEPARATE SHARE BUTTON */}
-                  <button
-                    className="z-share-btn"
-                    onClick={() => {
-                      if (contactMode === "phone") {
-                        if (inputValue.length !== 10) {
-                          alert(
-                            "Please enter a valid 10 digit Indian mobile number",
-                          );
-                          return;
-                        }
-                      } else {
-                        if (!/^\S+@\S+\.\S+$/.test(inputValue)) {
-                          alert("Please enter a valid email address");
-                          return;
-                        }
-                      }
-
-                      // SUCCESS FLOW
-                      setShowPopup(false);
-                      setShowAlert(true);
-                      setInputValue("");
-
-                      setTimeout(() => {
-                        setShowAlert(false);
-                      }, 2500);
-                    }}
-                  >
-                    Share App Link
-                  </button>
-                </div>
-
-                {/* STORE BUTTONS */}
-                <div className="z-store">
-                  <a href={APP_LINKS.android} target="_blank">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-                      alt="Google Play"
-                    />
-                  </a>
-                  <a href={APP_LINKS.ios} target="_blank">
-                    <img
-                      src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                      alt="App Store"
-                    />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
     </section>
   );
 };

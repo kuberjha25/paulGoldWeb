@@ -1,0 +1,141 @@
+/* =============================== */
+/* ABOUT & TERMS – SHARED STYLES */
+/* =============================== */
+
+.page-container {
+  max-width: 1000px;
+  margin: 120px auto 80px;
+  padding: 0 24px;
+  color: #ffffff;
+  font-family: "Gotham", sans-serif;
+}
+
+/* PAGE HEADING */
+.page-container h1 {
+  font-size: 42px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  color: #d7b483;
+  letter-spacing: -0.3px;
+}
+
+/* SUB HEADINGS (optional use) */
+.page-container h2 {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 40px 0 16px;
+  color: #ffe1b6;
+}
+
+/* PARAGRAPHS */
+.page-container p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #d1d1d1;
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+
+/* BULLET LISTS */
+.page-container ul {
+  margin: 20px 0 30px 20px;
+  padding: 0;
+}
+
+.page-container li {
+  margin-bottom: 12px;
+  color: #d1d1d1;
+  line-height: 1.7;
+}
+
+/* HIGHLIGHT BOX (optional sections) */
+.page-highlight {
+  background: linear-gradient(180deg, #2a2622, #1c1a18);
+  border-left: 4px solid #d7b483;
+  padding: 20px 24px;
+  margin: 30px 0;
+  border-radius: 12px;
+}
+
+.about-hero-image {
+  width: 80%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin: auto ;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+/* LINKS */
+.page-container a {
+  color: #d7b483;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.page-container a:hover {
+  text-decoration: underline;
+}
+
+/* DIVIDER */
+.page-divider {
+  width: 100%;
+  height: 1px;
+  margin: 40px 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #d7b483,
+    transparent
+  );
+  opacity: 0.4;
+}
+
+/* =============================== */
+/* RESPONSIVE */
+/* =============================== */
+
+@media (max-width: 1024px) {
+  .page-container {
+    margin: 100px auto 70px;
+  }
+
+  .page-container h1 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    margin: 80px auto 60px;
+    padding: 0 20px;
+  }
+
+  .page-container h1 {
+    font-size: 30px;
+  }
+
+  .page-container p {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    margin: 70px auto 50px;
+    padding: 0 16px;
+  }
+
+  .page-container h1 {
+    font-size: 26px;
+  }
+
+  .page-container h2 {
+    font-size: 20px;
+  }
+
+  .page-container p {
+    font-size: 14px;
+  }
+}

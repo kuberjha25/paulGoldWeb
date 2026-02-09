@@ -15,9 +15,10 @@ const HeroSection = () => {
   };
 
   return (
+    <section id="hero-section" className="hero-section">
     <div className="body-container">
       {/* Horizontal line at bottom */}
-      <div className="horizontal-line"></div>
+      {/* <div className="horizontal-line"></div> */}
 
       <div className="container">
         <div className="content-wrapper">
@@ -49,12 +50,23 @@ const HeroSection = () => {
               {/* Stats Section (Optional) */}
               <div className="stats-section">
                 <div className="stat-item">
-                  <h3>10K+</h3>
-                  <p>Happy Investors</p>
+                  <img src="goldbar.webp" alt="Gold Bar" className="stat-icon" />
+                  <div>
+                    <h3>24K</h3>
+                    <p>Pure Gold</p>
+                  </div>
                 </div>
-                <div className="stat-item">
-                  <h3>99.9%</h3>
-                  <p>Gold Purity</p>
+
+                <div className="stat-item-silver">
+                  <img
+                    src="silverbar.png"
+                    alt="Silver Bar"
+                    className="stat-icon"
+                  />
+                  <div>
+                    <h3>999</h3>
+                    <p>Silver Purity</p>
+                  </div>
                 </div>
                 {/* <div className="stat-item">
                   <h3>24/7</h3>
@@ -68,7 +80,7 @@ const HeroSection = () => {
           <div className="right-image">
             <div className="image-container">
               <img
-                src="WomanHoldingGold.png"
+                src="WomanHoldingGold.svg"
                 alt="Gold Investment Illustration"
                 className="hero-image"
               />
@@ -77,6 +89,7 @@ const HeroSection = () => {
         </div>
       </div>
     </div>
+    </section>
   );
 };
 

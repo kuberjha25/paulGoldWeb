@@ -1,8 +1,8 @@
 .pg-footer {
-  /* background: linear-gradient(135deg, #202020 0%, #1e1e1e 100%); */
   color: #fff;
   padding: 50px 0 20px;
   font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #202020 0%, #1e1e1e 100%);
 }
 
 .pg-footer-container {
@@ -19,8 +19,15 @@
 }
 
 /* LOGO */
+.pg-footer-logo {
+  display: flex;
+  align-items: flex-start;
+}
+
 .pg-footer-logo img {
   width: 150px;
+  height: auto;
+  object-fit: contain;
 }
 
 /* BLOCKS */
@@ -29,16 +36,20 @@
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 12px;
+  line-height: 1.4;
 }
 
 .pg-footer-block p {
   font-size: 14px;
   line-height: 1.7;
   color: #e0e0e0;
+  margin-bottom: 5px;
 }
 
 .pg-footer-block .bold {
   font-weight: 600;
+  color: #fff;
+  font-size: 15px;
 }
 
 .pg-footer-block .muted {
@@ -46,34 +57,33 @@
   color: #b5b5b5;
 }
 
-.pg-footer-block .mt {
-  margin-top: 14px;
-}
-
 /* SOCIAL */
 .pg-socials {
   display: flex;
   gap: 12px;
+  margin-top: 10px;
 }
 
 .pg-socials a {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 15px;
+  color: #d4af37;
+  font-size: 16px;
   transition: all 0.3s ease;
+  border: 1px solid #333;
 }
 
 .pg-socials a:hover {
   background: #d4af37;
   color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
 }
-
 
 /* BOTTOM */
 .pg-footer-bottom {
@@ -85,19 +95,333 @@
   color: #c9a84e;
 }
 
-/* RESPONSIVE */
-@media (max-width: 992px) {
-  .pg-footer-grid {
-    grid-template-columns: repeat(2, 1fr);
+/* =========================================== */
+/* TABLET RESPONSIVE STYLES (768px - 1024px) */
+/* =========================================== */
+@media (max-width: 1024px) {
+  .pg-footer {
+    padding: 40px 0 20px;
   }
-
+  
+  .pg-footer-container {
+    padding: 0 20px;
+  }
+  
+  .pg-footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  
   .pg-footer-logo {
-    grid-column: span 2;
+    grid-column: span 3;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .pg-footer-logo img {
+    width: 140px;
+  }
+  
+  .pg-footer-block {
+    text-align: center;
+  }
+  
+  .pg-socials {
+    justify-content: center;
+  }
+  
+  .pg-footer-bottom {
+    margin-top: 35px;
+    padding-top: 14px;
   }
 }
 
-@media (max-width: 576px) {
+/* Tablet Portrait Mode (768px - 900px) - Mobile-like layout */
+@media (max-width: 900px) and (orientation: portrait) {
+  .pg-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    row-gap: 25px;
+  }
+  
+  .pg-footer-logo {
+    grid-column: span 2;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .pg-footer-logo img {
+    width: 130px;
+  }
+  
+  .pg-footer-block {
+    text-align: left;
+    padding: 0 10px;
+  }
+  
+  .pg-footer-block h4 {
+    font-size: 14px;
+  }
+  
+  .pg-footer-block p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  
+  .pg-footer-block .bold {
+    font-size: 14px;
+  }
+  
+  .pg-socials {
+    justify-content: flex-start;
+  }
+  
+  .pg-socials a {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+  
+  .pg-footer-bottom {
+    margin-top: 30px;
+    padding-top: 12px;
+    font-size: 12px;
+  }
+}
+
+/* Tablet Landscape Mode (768px - 1024px) - Desktop-like layout */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .pg-footer-grid {
+    grid-template-columns: 1.2fr 1.3fr 1.3fr 1.2fr;
+    gap: 25px;
+  }
+  
+  .pg-footer-logo {
+    grid-column: span 1;
+    align-items: center;
+  }
+  
+  .pg-footer-logo img {
+    width: 140px;
+  }
+  
+  .pg-footer-block h4 {
+    font-size: 14px;
+  }
+  
+  .pg-footer-block p {
+    font-size: 13px;
+  }
+  
+  .pg-footer-block .bold {
+    font-size: 14px;
+  }
+  
+  .pg-socials a {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+}
+
+/* =========================================== */
+/* MOBILE RESPONSIVE STYLES (Below 768px) */
+/* =========================================== */
+@media (max-width: 768px) {
+  .pg-footer {
+    padding: 30px 0 15px;
+  }
+  
+  .pg-footer-container {
+    padding: 0 16px;
+  }
+  
   .pg-footer-grid {
     grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+  
+  .pg-footer-logo {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .pg-footer-logo img {
+    width: 120px;
+  }
+  
+  .pg-footer-block {
+    padding-bottom: 25px;
+    border-bottom: 1px solid #333;
+  }
+  
+  .pg-footer-block:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .pg-footer-block h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #d4af37;
+  }
+  
+  .pg-footer-block p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  
+  .pg-footer-block .bold {
+    font-size: 15px;
+  }
+  
+  .pg-footer-block .muted {
+    font-size: 12px;
+  }
+  
+  .pg-socials {
+    justify-content: center;
+    margin-top: 15px;
+  }
+  
+  .pg-socials a {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  
+  .pg-footer-bottom {
+    margin-top: 25px;
+    padding-top: 15px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #c9a84e;
+  }
+}
+
+/* Small Mobile (Below 480px) */
+@media (max-width: 480px) {
+  .pg-footer {
+    padding: 25px 0 15px;
+  }
+  
+  .pg-footer-container {
+    padding: 0 12px;
+  }
+  
+  .pg-footer-grid {
+    gap: 25px;
+  }
+  
+  .pg-footer-logo img {
+    width: 110px;
+  }
+  
+  .pg-footer-block {
+    padding-bottom: 20px;
+  }
+  
+  .pg-footer-block h4 {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  
+  .pg-footer-block p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  
+  .pg-footer-block .bold {
+    font-size: 14px;
+  }
+  
+  .pg-socials a {
+    width: 38px;
+    height: 38px;
+    font-size: 17px;
+  }
+  
+  .pg-footer-bottom {
+    margin-top: 20px;
+    padding-top: 12px;
+    font-size: 11px;
+  }
+}
+
+/* Very Small Mobile (Below 360px) */
+@media (max-width: 360px) {
+  .pg-footer {
+    padding: 20px 0 10px;
+  }
+  
+  .pg-footer-logo img {
+    width: 100px;
+  }
+  
+  .pg-footer-block h4 {
+    font-size: 14px;
+  }
+  
+  .pg-footer-block p {
+    font-size: 12px;
+  }
+  
+  .pg-footer-block .bold {
+    font-size: 13px;
+  }
+  
+  .pg-socials {
+    gap: 10px;
+  }
+  
+  .pg-socials a {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+  
+  .pg-footer-bottom {
+    font-size: 10px;
+  }
+}
+
+/* For better touch targets on mobile */
+@media (max-width: 768px) {
+  .pg-socials a {
+    min-width: 40px;
+    min-height: 40px;
+  }
+  
+  .pg-footer-block h4 {
+    cursor: default;
+  }
+}
+
+/* Optional: Add subtle animation for footer blocks on hover (desktop only) */
+@media (min-width: 769px) {
+  .pg-footer-block {
+    transition: transform 0.3s ease;
+  }
+  
+  .pg-footer-block:hover {
+    transform: translateY(-5px);
+  }
+}
+
+/* Fix for long address text on mobile */
+@media (max-width: 768px) {
+  .pg-footer-block p {
+    word-break: break-word;
+    hyphens: auto;
+  }
+}
+
+/* Special fix for address block */
+@media (max-width: 480px) {
+  .pg-footer-block:nth-child(2) p {
+    font-size: 12px;
+    line-height: 1.5;
   }
 }

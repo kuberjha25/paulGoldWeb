@@ -44,3 +44,50 @@ html {
 a[href^="#"] {
   text-decoration: none;
 }
+
+
+/* Rates loading and error indicators */
+.rates-loading-indicator {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(212, 175, 55, 0.9);
+  color: #000;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  z-index: 1000;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.rates-error-indicator {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 107, 107, 0.9);
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+/* Mobile responsive for indicators */
+@media (max-width: 768px) {
+  .rates-loading-indicator,
+  .rates-error-indicator {
+    top: 5px;
+    right: 5px;
+    font-size: 11px;
+    padding: 6px 12px;
+    max-width: 150px;
+  }
+}

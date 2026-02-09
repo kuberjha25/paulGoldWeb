@@ -1,22 +1,46 @@
-import React, { useState } from 'react';
-import '../styling/Header.css';
-import { FiMenu, FiX } from 'react-icons/fi';
+import React, { useState } from "react";
+import "../styling/Header.css";
+import { FiMenu, FiX } from "react-icons/fi";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ onOpenPopup, onSuccess }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const closeMenu = () => setIsMenuOpen(false);
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
-  const handleDownloadClick = () => {
-    // Add your download app logic here
-    alert('Download App clicked!');
+  const handleLogoClick = () => {
     closeMenu();
+    navigate("/");
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        document
+          .getElementById("hero-section")
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      document
+        .getElementById("hero-section")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handlePartnerClick = () => {
+    closeMenu();
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        document
+          .getElementById("contact-section")
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      document
+        .getElementById("contact-section")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -24,60 +48,82 @@ const Header = () => {
       <header className="header">
         <div className="container">
           {/* Mobile Menu Button */}
-          <button 
-            className="menu-toggle" 
-            onClick={toggleMenu}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          <button
+            className="menu-toggle"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <FiX /> : <FiMenu />}
           </button>
 
-          {/* Logo Section */}
-          <div className="logo-section">
+          {/* LOGO */}
+          <div className="logo-section" onClick={handleLogoClick}>
             <div className="company-logo">
               <img src="/logo.webp" alt="Paul Gold Logo" />
             </div>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* DESKTOP NAV */}
           <nav className="nav-menu">
             <ul>
-              <li><a href="#partner" onClick={closeMenu}>Partner with us</a></li>
-              <li><a href="#about" onClick={closeMenu}>About Us</a></li>
-              <li><a href="#terms" onClick={closeMenu}>Terms & Conditions</a></li>
+              <li>
+                <Link to="/" onClick={handlePartnerClick}>
+                  Partner with us
+                </Link>
+              </li>
+              <li>
+                <Link to="/aboutus" onClick={closeMenu}>
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms-condition" onClick={closeMenu}>
+                  Terms & Conditions
+                </Link>
+              </li>
             </ul>
           </nav>
 
-          {/* Desktop CTA Button */}
-          <button className="cta-button" onClick={handleDownloadClick}>
+          <button
+            className="cta-button"
+            onClick={onOpenPopup}
+          >
             Download App
           </button>
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      <div 
-        className={`overlay ${isMenuOpen ? 'active' : ''}`} 
+      {/* MOBILE OVERLAY */}
+      <div
+        className={`overlay ${isMenuOpen ? "active" : ""}`}
         onClick={closeMenu}
       />
 
-      {/* Mobile Menu Panel */}
-      <div className={`mobile-menu ${isMenuOpen ? 'active' : ''}`}>
-        <button 
-          className="mobile-close-btn" 
-          onClick={closeMenu}
-          aria-label="Close menu"
-        >
+      {/* MOBILE MENU */}
+      <div className={`mobile-menu ${isMenuOpen ? "active" : ""}`}>
+        <button className="mobile-close-btn" onClick={closeMenu}>
           <FiX />
         </button>
         <ul>
-          <li><a href="#partner" onClick={closeMenu}>Partner with us</a></li>
-          <li><a href="#about" onClick={closeMenu}>About Us</a></li>
-          <li><a href="#terms" onClick={closeMenu}>Terms & Conditions</a></li>
+          <li>
+            <Link to="/" onClick={handlePartnerClick}>Partner with us</Link>
+          </li>
+          <li>
+            <Link to="/aboutus" onClick={closeMenu}>
+              About Us
+            </Link>
+          </li>
+          <li>
+            <Link to="/terms-condition" onClick={closeMenu}>
+              Terms & Conditions
+            </Link>
+          </li>
           <li>
             <button 
-              className="mobile-cta-button" 
-              onClick={handleDownloadClick}
+              className="mobile-cta-button"
+              onClick={() => {
+                onOpenPopup();
+                closeMenu();
+              }}
             >
               Download App
             </button>
