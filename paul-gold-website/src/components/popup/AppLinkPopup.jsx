@@ -53,7 +53,7 @@ const AppLinkPopup = ({
         <div className="z-popup">
           {/* LEFT IMAGE */}
           <div className="z-left">
-            <img src="Dashboard.svg" alt="Paul Gold App" />
+            <img src="dashboard.svg" alt="Paul Gold App" />
           </div>
 
           {/* RIGHT CONTENT */}

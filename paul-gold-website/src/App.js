@@ -95,12 +95,11 @@ function App() {
             }
           });
           
-          console.log("Metal rates updated:", new Date().toLocaleTimeString());
         }
       }
       setError(null);
     } catch (error) {
-      console.error("Error fetching metal rates:", error);
+      // console.error("Error fetching metal rates:", error);
       setError("Unable to fetch live rates. Using cached rates.");
       // Don't set loading to false on error, keep showing cached data
     } finally {

@@ -11,7 +11,9 @@ const HeroSection = () => {
 
   const handleLearnMore = () => {
     // Add your learn more logic here
-    alert("Learn More button clicked!");
+   document.getElementById("contact-section")?.scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -50,7 +52,7 @@ const HeroSection = () => {
               {/* Stats Section (Optional) */}
               <div className="stats-section">
                 <div className="stat-item">
-                  <img src="goldbar.webp" alt="Gold Bar" className="stat-icon" />
+                  <img src="5.webp" alt="Gold Bar" className="stat-icon" />
                   <div>
                     <h3>24K</h3>
                     <p>Pure Gold</p>
@@ -59,7 +61,7 @@ const HeroSection = () => {
 
                 <div className="stat-item-silver">
                   <img
-                    src="silverbar.png"
+                    src="7.png"
                     alt="Silver Bar"
                     className="stat-icon"
                   />
@@ -80,7 +82,7 @@ const HeroSection = () => {
           <div className="right-image">
             <div className="image-container">
               <img
-                src="WomanHoldingGold.svg"
+                src="9.svg"
                 alt="Gold Investment Illustration"
                 className="hero-image"
               />

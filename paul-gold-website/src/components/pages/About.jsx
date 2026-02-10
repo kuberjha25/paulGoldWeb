@@ -10,7 +10,7 @@ const About = () => {
       <h1>About Us – Paul Digital Gold</h1>
 
       <img
-        src="About.webp"
+        src="1.webp"
         alt="Paul Digital Gold"
         className="about-hero-image"
       />

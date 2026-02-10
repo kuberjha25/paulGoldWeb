@@ -32,25 +32,25 @@ const BuySection = ({ onOpenPopup, onSuccess, metalRates, loading }) => {
       id: 1,
       title: "Gift",
       description: "Send digital gold as a gift to your loved ones",
-      icon: "gift.webp",
+      icon: "4.webp",
     },
     {
       id: 2,
       title: "Convert",
       description: "Convert between different denominations",
-      icon: "convert.webp",
+      icon: "2.webp",
     },
     {
       id: 3,
       title: "SIP",
       description: "Start a Systematic Investment Plan in gold",
-      icon: "sip.png",
+      icon: "8.png",
     },
     {
       id: 4,
       title: "Sell",
       description: "Sell your gold anytime at live market rates",
-      icon: "sell.webp",
+      icon: "6.webp",
     },
   ];
 
@@ -216,7 +216,7 @@ const BuySection = ({ onOpenPopup, onSuccess, metalRates, loading }) => {
           <div className="price-row">
             <div className="price-left">
               <img
-                src={metal === "gold" ? "goldbar.webp" : "silverbar.png"}
+                src={metal === "gold" ? "5.webp" : "7.png"}
                 alt={metal}
                 className="gold-bar-image"
               />
